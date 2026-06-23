@@ -9,7 +9,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - run: wget -O version.json "https://api.launchpad.net/devel/~ondrej/+archive/ubuntu/php?ws.op=getPublishedSources&exact_match=true&source_name=php8.3&status=Published&distro_series=https://api.launchpad.net/devel/ubuntu/noble"
       - name: Get latest version
         id: version
@@ -23,7 +23,7 @@ jobs:
       - run: sed -i "s/ENV PHP_VERSION 8.3.*-/ENV PHP_VERSION ${{ steps.php.outputs.version }}-/g" Dockerfile
       - run: rm version.json
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.6
+        uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v7.0.6
         with:
             token: ${{ secrets.PAT }}
             commit-message: 'PHP ${{steps.php.outputs.version}}'
